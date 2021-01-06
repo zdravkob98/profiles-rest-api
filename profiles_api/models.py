@@ -10,14 +10,14 @@ class UserProfileManager(BaseUserManager):
         """Create a new user profile"""
         if not email:
             raise ValueError('User must have an email address')
-            
-            email = self.normalize_email(email)
-            user = self.model(email=email, name=name)
 
-            user.set_password(password)
-            user.save(using=self._db)
+        email = self.normalize_email(email)
+        user = self.model(email=email, name=name)
 
-            return user
+        user.set_password(password)
+        user.save(using=self._db)
+
+        return user
 
     def create_superuser(self, email, name, password):
         """Create and save a new superuser with given details"""
@@ -50,6 +50,6 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
         """Retrive short name of user"""
         return self.name
 
-def __str__(self):
-    """Return string representation of our user"""
-    return self.email
+    def __str__(self):
+        """Return string representation of our user"""
+        return self.email
